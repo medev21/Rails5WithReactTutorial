@@ -13,6 +13,10 @@
     index = lifts.indexOf lift
     lifts.splice index, 1
     @replaceState lifts: lifts
+  updateLift: (lift, data) ->
+    index = @state.lifts.indexOf lift
+    lifts = React.addons.update(@state.lifts, { $splice: [[index, 1, data]] })
+    @replaceState lifts: lifts
   render: ->
     React.DOM.div
       className: 'lifts'
@@ -26,11 +30,11 @@
             React.DOM.th null, 'Date'
             React.DOM.th null, 'Lift Name'
             React.DOM.th null, 'Weight Lifted'
-            React.DOM.th null, 'Metric ?'
             React.DOM.th null, 'Reps Performed'
             React.DOM.th null, '1 RM'
+            React.DOM.th null, 'Metric ?'
             React.DOM.th null, 'Actions'
           React.DOM.tbody null,
             for lift in @state.lifts
-              React.createElement Lift, key: lift.id, lift: lift, handleDeleteLift: @deleteLift
+              React.createElement Lift, key: lift.id, lift: lift, handleDeleteLift: @deleteLift, handleEditLift: @updateLift
               #this sends Lift to lift.js.coffee and grabs the data
