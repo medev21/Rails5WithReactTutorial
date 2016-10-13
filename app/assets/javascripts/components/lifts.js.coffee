@@ -15,6 +15,8 @@
     @replaceState lifts: lifts
   updateLift: (lift, data) ->
     index = @state.lifts.indexOf lift
+    console.log(lift);
+    console.log(data);
     lifts = React.addons.update(@state.lifts, { $splice: [[index, 1, data]] })
     @replaceState lifts: lifts
   render: ->
